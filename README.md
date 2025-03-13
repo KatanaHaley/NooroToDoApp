@@ -1,40 +1,100 @@
+# Next.js To Do App
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+## To Do App Overview
 
+A full-stack Todo List application built with:
+- **Frontend**: Next.js and Tailwind CSS
+- **Backend**: Express.js, Prisma ORM, and MySQL
+
+---
+
+## Repositories
+
+- **Frontend**: `todo-frontend` – Contains the Next.js application with Tailwind CSS styling.
+- **Backend**: `todo-backend` – Contains the Express.js API with Prisma ORM for MySQL.
+
+---
+
+## Frontend Setup (Next.js)
+
+### Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/todo-frontend.git
+cd todo-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install Dependencies
+```bash
+yarn install
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Configure Environment Variables
+- Create a `.env.local` file if needed for any custom environment variables.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Run the Development Server
+```bash
+yarn dev
+```
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Backend Setup (Express.js & Prisma)
 
-## Learn More
+### Clone the Repository
+```bash
+git clone https://github.com/yourusername/todo-backend.git
+cd todo-backend
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Install Dependencies
+```bash
+yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### Configure Environment Variables
+- Create a `.env` file in the root with your database connection details:
+  ```env
+  DATABASE_URL="mysql://USER:PASSWORD@localhost:3306/yourdbname"
+  PORT=4000
+  ```
+  Replace `USER`, `PASSWORD`, and `yourdbname` with your actual MySQL credentials.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Database Initialization using Prisma
+- **Generate the Prisma client:**
+  ```bash
+  npx prisma generate
+  ```
+- **Create and apply the initial migration:**
+  ```bash
+  npx prisma migrate dev --name init
+  ```
+  _Alternatively, if you don’t want to use migrations, you can run:_
+  ```bash
+  npx prisma db push
+  ```
+  This pushes your Prisma schema directly to the database.
 
-## Deploy on Vercel
+### Run the Backend Server
+```bash
+yarn dev
+```
+The API will be available at [http://localhost:4000](http://localhost:4000).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## Usage
+
+- **Frontend:** Use the UI at [http://localhost:3000](http://localhost:3000) to add, update, and delete tasks.
+- **Backend:** The API endpoints (e.g., `/tasks`) handle CRUD operations and are used by the frontend. You can also test these endpoints using Postman.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { CheckCircle, Trash, PlusCircle } from "lucide-react";
+import { PlusCircle, ArrowLeft  } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";
+
 
 interface Todo {
   id: number;
@@ -15,8 +16,6 @@ const CreateTaskPage = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState("");
   const [selectedColor, setSelectedColor] = useState("#4F46E5");
-  const [taskName, setTaskName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
 
   const router = useRouter();
 
@@ -39,15 +38,16 @@ const CreateTaskPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:4000/tasks", {
-        title: taskName,
-        description: description,
+        title: newTodo,
+        color: selectedColor,
+        completed: false
       });
 
       if (response.status === 201) {
         console.log("Task created successfully");
-        setTaskName("");
-        setDescription("");
         setTodos((prevTodos) => [...prevTodos, response.data]); // Update state with new task
+        setNewTodo("");
+        setSelectedColor("");
       }
     } catch (error) {
       console.error("Error creating task:", error);
@@ -67,23 +67,25 @@ const CreateTaskPage = () => {
       setTodos((prevTodos) => [...prevTodos, res.data]);
       setNewTodo("");
       setSelectedColor("#4F46E5");
+      alert("Task created successfully!");
     } catch (error) {
-      console.error("Error adding todo:", error);
+      console.error("Error deleting todo:", error);
     }
   };
 
   return (
     <>
       <Navbar />
-
       {/* Back Button */}
+      <div className="flex flex-col bg-[#1A1A1A] text-white px-40 py-2">
+
       <button
-        className="text-sm text-blue-400 underline mt-4 bg-[#1A1A1A]"
+        className="text-sm text-white underline mt-4 bg-transparent cursor-pointer"
         onClick={() => router.push("/")}
       >
-        Back
+        <ArrowLeft />
       </button>
-
+      </div>
       {/* Main Content */}
       <div className="flex flex-col items-center min-h-screen bg-[#1A1A1A] text-white px-6 py-10">
         {/* Create Task Form */}
@@ -93,9 +95,9 @@ const CreateTaskPage = () => {
               <label className="block font-semibold text-[#4EA8DE]">Title</label>
               <input
                 type="text"
-                value={taskName}
+                value={newTodo}
                 placeholder="Ex: Brush your teeth"
-                onChange={(e) => setTaskName(e.target.value)}
+                onChange={(e) => setNewTodo(e.target.value)}
                 className="w-full mb-10 mt-2 px-3 py-2 rounded text-white bg-[#262626]"
                 required
               />
@@ -118,16 +120,13 @@ const CreateTaskPage = () => {
             </div>
 
             <button
+              className="w-full bg-[#1E6F9F] px-6 py-3 rounded-lg mt-6 flex items-center justify-center space-x-2 text-white hover:bg-blue-700 transition cursor-pointer"
               onClick={addTodo}
-              type="submit"
-              className="w-full bg-blue-600 px-6 py-3 rounded-lg text-white hover:bg-blue-700 transition"
             >
-              Add Task
+              <span>Add Task</span> <PlusCircle size={20} />
             </button>
           </form>
-        </div>
-
-       
+        </div>       
       </div>
     </>
   );

@@ -562,21 +562,18 @@ function Home() {
             }["Home.useEffect"]);
         }
     }["Home.useEffect"], []);
-    // const addTodo = async () => {
-    //   if (!newTodo.trim()) return;
-    //   try {
-    //     const res = await axios.post("http://localhost:4000/tasks", { 
-    //       title: newTodo, 
-    //       color: selectedColor, 
-    //       completed: false 
-    //     });
-    //     setTodos([...todos, res.data]);
-    //     setNewTodo("");
-    //     setSelectedColor("#4F46E5");
-    //   } catch (error) {
-    //     console.error("Error adding todo:", error);
-    //   }
-    // };
+    // Update Todo Title & Color
+    const updateTodo = async (id, title, color)=>{
+        try {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"].put(`http://localhost:4000/tasks/${id}`, {
+                title,
+                color
+            });
+            setTodos((prevTodos)=>prevTodos.map((todo)=>todo.id === id ? res.data : todo));
+        } catch (error) {
+            console.error("Error updating todo:", error);
+        }
+    };
     const toggleTodo = async (id, completed)=>{
         try {
             const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"].put(`http://localhost:4000/tasks/${id}`, {
@@ -591,6 +588,7 @@ function Home() {
         try {
             await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"].delete(`http://localhost:4000/tasks/${id}`);
             setTodos(todos.filter((todo)=>todo.id !== id));
+            alert("Task deleted successfully!");
         } catch (error) {
             console.error("Error deleting todo:", error);
         }
@@ -600,35 +598,35 @@ function Home() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Navbar$2e$tsx__$5b$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/src/pages/index.tsx",
-                lineNumber: 67,
+                lineNumber: 65,
                 columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-col items-center min-h-screen bg-[#1A1A1A] text-white px-6 py-10",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "w-full bg-[#1E6F9F] px-6 py-3 rounded-lg mt-6 flex items-center justify-center space-x-2 text-white hover:bg-blue-700 transition",
+                        className: "w-full bg-[#1E6F9F] px-6 py-3 rounded-lg mt-6 flex items-center justify-center space-x-2 text-white hover:bg-blue-700 transition cursor-pointer",
                         onClick: ()=>router.push("/createtaskpage"),
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$plus$2e$js__$5b$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusCircle$3e$__["PlusCircle"], {
-                                size: 20
-                            }, void 0, false, {
-                                fileName: "[project]/src/pages/index.tsx",
-                                lineNumber: 73,
-                                columnNumber: 7
-                            }, this),
-                            " ",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: "Create Task"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/index.tsx",
-                                lineNumber: 73,
-                                columnNumber: 32
+                                lineNumber: 71,
+                                columnNumber: 8
+                            }, this),
+                            " ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$plus$2e$js__$5b$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusCircle$3e$__["PlusCircle"], {
+                                size: 20
+                            }, void 0, false, {
+                                fileName: "[project]/src/pages/index.tsx",
+                                lineNumber: 71,
+                                columnNumber: 33
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/index.tsx",
-                        lineNumber: 69,
+                        lineNumber: 67,
                         columnNumber: 8
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -645,13 +643,13 @@ function Home() {
                                                 children: todos.length
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/index.tsx",
-                                                lineNumber: 80,
+                                                lineNumber: 78,
                                                 columnNumber: 23
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/index.tsx",
-                                        lineNumber: 80,
+                                        lineNumber: 78,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -667,19 +665,19 @@ function Home() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/index.tsx",
-                                                lineNumber: 81,
+                                                lineNumber: 79,
                                                 columnNumber: 54
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/index.tsx",
-                                        lineNumber: 81,
+                                        lineNumber: 79,
                                         columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/index.tsx",
-                                lineNumber: 79,
+                                lineNumber: 77,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -697,70 +695,109 @@ function Home() {
                                                             className: "text-green-500"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/pages/index.tsx",
-                                                            lineNumber: 92,
+                                                            lineNumber: 90,
                                                             columnNumber: 21
                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "w-5 h-5 border-2 border-gray-500 rounded-full"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/pages/index.tsx",
-                                                            lineNumber: 94,
+                                                            lineNumber: 92,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/index.tsx",
-                                                        lineNumber: 90,
+                                                        lineNumber: 88,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: `text-lg ${todo.completed ? "line-through text-gray-500" : "text-white"}`,
-                                                        children: todo.title
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "flex items-center space-x-2",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "text",
+                                                                value: todo.title,
+                                                                onChange: (e)=>updateTodo(todo.id, e.target.value, todo.color),
+                                                                className: `bg-transparent text-lg outline-none w-full ${todo.completed ? "line-through text-gray-400" : "text-white"}`
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/pages/index.tsx",
+                                                                lineNumber: 99,
+                                                                columnNumber: 15
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/pages/index.tsx",
+                                                            lineNumber: 98,
+                                                            columnNumber: 15
+                                                        }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/index.tsx",
-                                                        lineNumber: 97,
+                                                        lineNumber: 95,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/index.tsx",
-                                                lineNumber: 89,
+                                                lineNumber: 87,
                                                 columnNumber: 15
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: "text-white hover:text-red-700 transition",
-                                                onClick: ()=>deleteTodo(todo.id),
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2e$js__$5b$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash$3e$__["Trash"], {
-                                                    size: 20
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/pages/index.tsx",
-                                                    lineNumber: 109,
-                                                    columnNumber: 17
-                                                }, this)
-                                            }, void 0, false, {
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex justify-end items-center space-x-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        type: "color",
+                                                        value: todo.color,
+                                                        onChange: (e)=>updateTodo(todo.id, todo.title, e.target.value),
+                                                        className: "w-6 h-6 rounded-full  transition-all cursor-pointer p-0 appearance-none outline-none",
+                                                        style: {
+                                                            backgroundColor: todo.color,
+                                                            boxShadow: `0 0 0 2px ${todo.color}, 0 0 0 4px white`
+                                                        }
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/pages/index.tsx",
+                                                        lineNumber: 110,
+                                                        columnNumber: 15
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        className: "text-white hover:text-red-700 transition",
+                                                        onClick: ()=>deleteTodo(todo.id),
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2e$js__$5b$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash$3e$__["Trash"], {
+                                                            size: 20
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/pages/index.tsx",
+                                                            lineNumber: 125,
+                                                            columnNumber: 17
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/pages/index.tsx",
+                                                        lineNumber: 121,
+                                                        columnNumber: 15
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
                                                 fileName: "[project]/src/pages/index.tsx",
-                                                lineNumber: 105,
+                                                lineNumber: 109,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, todo.id, true, {
                                         fileName: "[project]/src/pages/index.tsx",
-                                        lineNumber: 87,
+                                        lineNumber: 85,
                                         columnNumber: 13
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/index.tsx",
-                                lineNumber: 85,
+                                lineNumber: 83,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/index.tsx",
-                        lineNumber: 77,
+                        lineNumber: 75,
                         columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/index.tsx",
-                lineNumber: 68,
+                lineNumber: 66,
                 columnNumber: 5
             }, this)
         ]

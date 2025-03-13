@@ -1965,6 +1965,10 @@
     object-position: top;
   }
 
+  .p-0 {
+    padding: calc(var(--spacing) * 0);
+  }
+
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
@@ -2011,6 +2015,14 @@
 
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
+  }
+
+  .px-20 {
+    padding-inline: calc(var(--spacing) * 20);
+  }
+
+  .px-40 {
+    padding-inline: calc(var(--spacing) * 40);
   }
 
   .py-1 {

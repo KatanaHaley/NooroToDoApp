@@ -26,21 +26,18 @@ export default function Home() {
       .catch((err) => console.error("Error fetching todos:", err));
   }, []);
 
-  // const addTodo = async () => {
-  //   if (!newTodo.trim()) return;
-  //   try {
-  //     const res = await axios.post("http://localhost:4000/tasks", { 
-  //       title: newTodo, 
-  //       color: selectedColor, 
-  //       completed: false 
-  //     });
-  //     setTodos([...todos, res.data]);
-  //     setNewTodo("");
-  //     setSelectedColor("#4F46E5");
-  //   } catch (error) {
-  //     console.error("Error adding todo:", error);
-  //   }
-  // };
+
+   // Update Todo Title & Color
+   const updateTodo = async (id: number, title: string, color: string) => {
+    try {
+      const res = await axios.put(`http://localhost:4000/tasks/${id}`, { title, color });
+      setTodos((prevTodos) => 
+        prevTodos.map((todo) => (todo.id === id ? res.data : todo))
+      );
+    } catch (error) {
+      console.error("Error updating todo:", error);
+    }
+  };
 
   const toggleTodo = async (id: number, completed: boolean) => {
     try {
@@ -55,6 +52,7 @@ export default function Home() {
     try {
       await axios.delete(`http://localhost:4000/tasks/${id}`);
       setTodos(todos.filter(todo => todo.id !== id));
+      alert("Task deleted successfully!");
     } catch (error) {
       console.error("Error deleting todo:", error);
     }
@@ -67,10 +65,10 @@ export default function Home() {
     <Navbar />
     <div className="flex flex-col items-center min-h-screen bg-[#1A1A1A] text-white px-6 py-10">
        <button
-      className="w-full bg-[#1E6F9F] px-6 py-3 rounded-lg mt-6 flex items-center justify-center space-x-2 text-white hover:bg-blue-700 transition"
+      className="w-full bg-[#1E6F9F] px-6 py-3 rounded-lg mt-6 flex items-center justify-center space-x-2 text-white hover:bg-blue-700 transition cursor-pointer"
       onClick={() => router.push("/createtaskpage")} // Update with the correct route
     >
-      <PlusCircle size={20} /> <span>Create Task</span>
+       <span>Create Task</span> <PlusCircle size={20} />
     </button>
 
       {/* Task List Container */}
@@ -97,17 +95,36 @@ export default function Home() {
                 <span 
                   className={`text-lg ${todo.completed ? "line-through text-gray-500" : "text-white"}`}
                 >
-                  {todo.title}
-                </span>
+              <div className="flex items-center space-x-2">
+              <input 
+                type="text" 
+                value={todo.title}
+                onChange={(e) => updateTodo(todo.id, e.target.value, todo.color)}
+                className={`bg-transparent text-lg outline-none w-full ${todo.completed ? "line-through text-gray-400" : "text-white"}`}
+              />
+             
               </div>
+              </span>
+              </div>
+              <div className="flex justify-end items-center space-x-2">
+              <input
+                type="color"
+                value={todo.color}
+                onChange={(e) => updateTodo(todo.id, todo.title, e.target.value)}
+                className="w-6 h-6 rounded-full  transition-all cursor-pointer p-0 appearance-none outline-none"
+                style={{
+                  backgroundColor: todo.color,
+                  boxShadow: `0 0 0 2px ${todo.color}, 0 0 0 4px white`
+                }}
+              />
 
-              {/* Delete Button */}
-              <button 
+              <button
                 className="text-white hover:text-red-700 transition"
                 onClick={() => deleteTodo(todo.id)}
               >
                 <Trash size={20} />
               </button>
+            </div>
             </li>
           ))}
         </ul>
