@@ -79,6 +79,10 @@ yarn install
   ```
   This pushes your Prisma schema directly to the database.
 
+** View the live data available in Prisma Studio at [http://localhost:5555](http://localhost:5555).
+  ```npx prisma studio
+  ```
+
 ### Run the Backend Server
 ```bash
 yarn dev
