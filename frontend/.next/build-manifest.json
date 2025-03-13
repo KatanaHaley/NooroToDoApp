@@ -9,14 +9,31 @@
       "static/chunks/src_pages__app_5771e187._.js",
       "static/chunks/src_pages__app_e6aa9726._.js"
     ],
-    "/": [
-      "static/chunks/node_modules_next_dist_8cd83220._.js",
+    "/createtaskpage": [
+      "static/chunks/node_modules_next_f5f51eb7._.js",
       "static/chunks/node_modules_react-dom_82bb97c6._.js",
       "static/chunks/node_modules_axios_lib_9aa2336a._.js",
-      "static/chunks/node_modules_1b7400a8._.js",
-      "static/chunks/[root of the server]__23b907f9._.js",
+      "static/chunks/node_modules_193cb5ed._.js",
+      "static/chunks/[root of the server]__3e2d879b._.js",
+      "static/chunks/src_pages_createtaskpage_5771e187._.js",
+      "static/chunks/src_pages_createtaskpage_9a6bcd9f._.js"
+    ],
+    "/_error": [
+      "static/chunks/[root of the server]__57f0e368._.js",
+      "static/chunks/node_modules_react-dom_82bb97c6._.js",
+      "static/chunks/node_modules_beb00741._.js",
+      "static/chunks/[root of the server]__ca38f087._.js",
+      "static/chunks/src_pages__error_5771e187._.js",
+      "static/chunks/src_pages__error_fce41f88._.js"
+    ],
+    "/": [
+      "static/chunks/node_modules_next_f5f51eb7._.js",
+      "static/chunks/node_modules_react-dom_82bb97c6._.js",
+      "static/chunks/node_modules_axios_lib_9aa2336a._.js",
+      "static/chunks/node_modules_bd0de7c5._.js",
+      "static/chunks/[root of the server]__fc522e50._.js",
       "static/chunks/src_pages_index_5771e187._.js",
-      "static/chunks/src_pages_index_ddb9587e._.js"
+      "static/chunks/src_pages_index_b21f5787._.js"
     ]
   },
   "devFiles": [],
